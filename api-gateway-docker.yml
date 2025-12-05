@@ -13,7 +13,7 @@ spring:
           lower-case-service-id: true
 
       routes:
-        # Ruta principal del microservicio ms-loan
+        # RUTA PRINCIPAL
         - id: ms-loan
           uri: lb://ms-loan
           predicates:
@@ -21,8 +21,8 @@ spring:
           filters:
             - StripPrefix=1
 
-        # ⚠️ Ruta específica para swagger de ms-loan
-        - id: ms-loan-swagger
+        # RUTA ESPECIAL PARA SWAGGER
+        - id: loan-swagger
           uri: lb://ms-loan
           predicates:
             - Path=/ms-loan/v3/api-docs
@@ -44,9 +44,3 @@ eureka:
     fetch-registry: true
   instance:
     prefer-ip-address: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "health,info,*"
