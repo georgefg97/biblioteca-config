@@ -13,10 +13,19 @@ spring:
           lower-case-service-id: true
 
       routes:
+        # Ruta principal del microservicio ms-loan
         - id: ms-loan
           uri: lb://ms-loan
           predicates:
             - Path=/ms-loan/**
+          filters:
+            - StripPrefix=1
+
+        # ⚠️ Ruta específica para swagger de ms-loan
+        - id: ms-loan-swagger
+          uri: lb://ms-loan
+          predicates:
+            - Path=/ms-loan/v3/api-docs
           filters:
             - StripPrefix=1
 
