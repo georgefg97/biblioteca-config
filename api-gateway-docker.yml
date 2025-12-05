@@ -10,11 +10,11 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: false   # ❗ MUY IMPORTANTE ❗
+          lower-case-service-id: false   # 🔥 MUY IMPORTANTE
 
       routes:
         - id: ms-loan
-          uri: lb://MS-LOAN        # ❗ EXACTAMENTE COMO SALE EN EUREKA
+          uri: lb://MS-LOAN              # 🔥 EXACTO como aparece en Eureka
           predicates:
             - Path=/ms-loan/**
           filters:
@@ -25,7 +25,7 @@ springdoc:
     path: /swagger-ui.html
     urls:
       - name: Loan Service API
-        url: /ms-loan/v3/api-docs
+        url: /ms-loan/v3/api-docs        # Gateway redirige al microservicio
 
 eureka:
   client:
@@ -33,3 +33,12 @@ eureka:
       defaultZone: http://eureka:8761/eureka
     register-with-eureka: true
     fetch-registry: true
+
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
