@@ -5,20 +5,13 @@ spring:
   application:
     name: api-gateway
 
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-    urls:
-      - name: Loan Service API
-        url: /ms-loan/v3/api-docs
-
-spring:
   cloud:
     gateway:
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
+
       routes:
         - id: ms-loan
           uri: lb://ms-loan
@@ -26,6 +19,13 @@ spring:
             - Path=/ms-loan/**
           filters:
             - StripPrefix=1
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: Loan Service API
+        url: /ms-loan/v3/api-docs
 
 eureka:
   client:
