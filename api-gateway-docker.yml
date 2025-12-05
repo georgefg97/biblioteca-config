@@ -13,19 +13,10 @@ spring:
           lower-case-service-id: true
 
       routes:
-        # RUTA PRINCIPAL
         - id: ms-loan
           uri: lb://ms-loan
           predicates:
             - Path=/ms-loan/**
-          filters:
-            - StripPrefix=1
-
-        # RUTA ESPECIAL PARA SWAGGER
-        - id: loan-swagger
-          uri: lb://ms-loan
-          predicates:
-            - Path=/ms-loan/v3/api-docs
           filters:
             - StripPrefix=1
 
@@ -44,3 +35,9 @@ eureka:
     fetch-registry: true
   instance:
     prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,*"
