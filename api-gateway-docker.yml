@@ -10,11 +10,11 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: true
+          lower-case-service-id: false   # ❗ muy importante
 
       routes:
         - id: ms-loan
-          uri: lb://ms-loan
+          uri: lb://MS-LOAN        # ❗ igualito como aparece en Eureka
           predicates:
             - Path=/ms-loan/**
           filters:
@@ -33,11 +33,6 @@ eureka:
       defaultZone: http://eureka:8761/eureka
     register-with-eureka: true
     fetch-registry: true
+
   instance:
     prefer-ip-address: true
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "health,info,*"
