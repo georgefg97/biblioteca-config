@@ -10,13 +10,13 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: false   # 🔥 MUY IMPORTANTE
+          lower-case-service-id: false   # Mantenemos esto porque usas MS-LOAN en mayúsculas
 
       routes:
-        - id: ms-loan
-          uri: lb://MS-LOAN              # 🔥 EXACTO como aparece en Eureka
+        - id: MS-LOAN
+          uri: lb://MS-LOAN              # EXACTO como aparece en Eureka
           predicates:
-            - Path=/ms-loan/**
+            - Path=/MS-LOAN/**           # 🔥 EN MAYÚSCULAS
           filters:
             - StripPrefix=1
 
@@ -25,7 +25,7 @@ springdoc:
     path: /swagger-ui.html
     urls:
       - name: Loan Service API
-        url: /ms-loan/v3/api-docs        # Gateway redirige al microservicio
+        url: /MS-LOAN/v3/api-docs        # 🔥 TAMBIÉN EN MAYÚSCULAS
 
 eureka:
   client:
