@@ -10,13 +10,13 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: false   # Mantenemos esto porque usas MS-LOAN en mayúsculas
+          lower-case-service-id: false   # 🔥 MUY IMPORTANTE (porque Eureka usa MS-LOAN)
 
       routes:
-        - id: MS-LOAN
-          uri: lb://MS-LOAN              # EXACTO como aparece en Eureka
+        - id: ms-loan-route
+          uri: lb://MS-LOAN             # 🔥 EXACTO como aparece en Eureka
           predicates:
-            - Path=/MS-LOAN/**           # 🔥 EN MAYÚSCULAS
+            - Path=/MS-LOAN/**          # 🔥 Debe estar en mayúsculas
           filters:
             - StripPrefix=1
 
@@ -25,12 +25,12 @@ springdoc:
     path: /swagger-ui.html
     urls:
       - name: Loan Service API
-        url: /MS-LOAN/v3/api-docs        # 🔥 TAMBIÉN EN MAYÚSCULAS
+        url: /MS-LOAN/v3/api-docs        # 🔥 Gateway debe llamar al path correcto
 
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka:8761/eureka
+      defaultZone: http://eureka:8761/eureka/
     register-with-eureka: true
     fetch-registry: true
 
