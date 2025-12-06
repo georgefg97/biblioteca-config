@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: ms-loan
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak:9090/realms/biblioteca-realm1  
 
   datasource:
     url: jdbc:mysql://mysql:3306/biblioteca_db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=America/La_Paz
