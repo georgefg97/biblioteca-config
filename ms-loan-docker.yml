@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:mysql://mysql:3306/biblioteca_db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=America/La_Paz
     username: root
-    password:
+    password: "{cipher}ec6986fe11a9933f9be66042b3213171c3abcffed78f931391b6b83dfa887df1" 
 
   jpa:
     hibernate:
