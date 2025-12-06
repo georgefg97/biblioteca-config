@@ -4,7 +4,8 @@ server:
 spring:
   application:
     name: api-gateway
-security:
+
+  security:
     oauth2:
       client:
         provider:
@@ -19,20 +20,22 @@ security:
       resourceserver:
         jwt:
           issuer-uri: http://keycloak:9090/realms/biblioteca-realm1
+
   cloud:
     gateway:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: false   # 🔥 MUY IMPORTANTE (porque Eureka usa MS-LOAN)
+          lower-case-service-id: false
 
       default-filters:
         - TokenRelay
+
       routes:
         - id: ms-loan-route
-          uri: lb://MS-LOAN             # 🔥 EXACTO como aparece en Eureka
+          uri: lb://MS-LOAN
           predicates:
-            - Path=/MS-LOAN/**          # 🔥 Debe estar en mayúsculas
+            - Path=/MS-LOAN/**
           filters:
             - StripPrefix=1
 
@@ -41,7 +44,7 @@ springdoc:
     path: /swagger-ui.html
     urls:
       - name: Loan Service API
-        url: /MS-LOAN/v3/api-docs        # 🔥 Gateway debe llamar al path correcto
+        url: /MS-LOAN/v3/api-docs
 
 eureka:
   client:
