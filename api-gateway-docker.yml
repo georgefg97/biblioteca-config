@@ -4,7 +4,21 @@ server:
 spring:
   application:
     name: api-gateway
+security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://keycloak:9090/realms/biblioteca-realm1
+        registration:
+          biblio-client:
+            client-id: biblio-client
+            client-secret: TU_SECRET
+            scope: openid,profile,email
 
+      resourceserver:
+        jwt:
+          issuer-uri: http://keycloak:9090/realms/biblioteca-realm1
   cloud:
     gateway:
       discovery:
@@ -12,6 +26,8 @@ spring:
           enabled: true
           lower-case-service-id: false   # 🔥 MUY IMPORTANTE (porque Eureka usa MS-LOAN)
 
+      default-filters:
+        - TokenRelay
       routes:
         - id: ms-loan-route
           uri: lb://MS-LOAN             # 🔥 EXACTO como aparece en Eureka
